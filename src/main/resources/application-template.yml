@@ -1,0 +1,50 @@
+server:
+  port: 8081
+
+# JPA核心配置：自动更新表结构
+spring:
+  #MySQL数据源
+  datasource:
+    url: jdbc:mysql://localhost:3306/first?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+    username: root
+    password: [填写你的数据库密码]
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+  mail:
+    host: smtp.qq.com
+    port: 587
+    username: youremail@exaple.com
+    password: [邮箱授权码]
+    properties:
+      mail:
+        smtp:
+          starttls:
+            enable: true
+          auth: true
+
+jwt:
+  # JWT 签名密钥（建议至少32位，生产环境请用随机强字符串，不要直接用示例）
+  secret: [填写JWT密钥.至少32位]
+  # Token 过期时间（单位：毫秒），这里配置 24小时 = 86400000 毫秒
+  expire: 86400000
+
+
+  # 文件上传配置（核心）
+  file:
+    upload:
+      root-path: D:/novel/upload/  # Windows路径（推荐，避免Linux权限问题）
+      # root-path: /opt/novel/upload/  # Linux/Mac路径（部署时用）
+    access:
+      domain: http://localhost:8080  # 你的服务地址+端口
+
+  # 开启文件上传大小限制（默认可能太小）
+  spring:
+    servlet:
+      multipart:
+        max-file-size: 10MB        # 单个文件最大10MB
+        max-request-size: 20MB     # 单次请求最大20MB
+
